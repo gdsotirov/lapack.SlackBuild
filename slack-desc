@@ -1,11 +1,13 @@
-lapack: LAPACK (a library of linear algebra routines)
+lapack: LAPACK (Linear Algebra PACKage)
 lapack:
-lapack: LAPACK version 3 is a comprehensive FORTRAN library that does linear
-lapack: algebra operations including matrix inversions, least squared
-lapack: solutions to linear sets of equations, eigenvector analysis, singular
-lapcak: value decomposition, etc. It is a very comprehensive and reputable
-lapack: package that has found extensive use in the scientific community.
-lapack:
-lapack:
-lapack:
-lapack: Packaged by Geordi D. Sotirov <gdsotirov@dir.bg>
+lapack: LAPACK is written in Fortran90 and provides routines for solving
+lapack: systems of simultaneous linear equations, least-squares solutions
+lapack: of linear systems of equations, eigenvalue problems, and singular
+lapack: value problems.  The associated matrix factorizations (LU,
+lapack: Cholesky, QR, SVD, Schur, generalized Schur) are also provided,
+lapack: as are related computations such as reordering of the Schur
+lapack: factorizations and estimating condition numbers.  Dense and banded
+lapack: matrices are handled, but not general sparse matrices.  In all
+lapack: areas, similar functionality is provided for real and complex
+lapack: matrices, in both single and double precision.
+lapack: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
