@@ -1,0 +1,94 @@
+diff -U 3 -N -r lapack-3.2.1-orig/SRC/Makefile lapack-3.2.1/SRC/Makefile
+--- lapack-3.2.1-orig/SRC/Makefile	2008-11-18 01:45:27.000000000 +0200
++++ lapack-3.2.1/SRC/Makefile	2009-10-24 18:07:53.000000000 +0300
+@@ -357,7 +357,7 @@
+    zla_heamv.o zla_hercond_c.o zla_hercond_x.o zla_herpvgrw.o		\
+    zla_lin_berr.o zlarscl2.o zlascl2.o zla_wwaddw.o
+ 
+-all: ../$(LAPACKLIB)
++all: $(LAPACKLIB)
+ 
+ ifdef USEXBLAS
+ ALLXOBJ=$(SXLASRC) $(DXLASRC) $(CXLASRC) $(ZXLASRC) $(ALLXAUX)
+@@ -366,9 +366,8 @@
+ ALLOBJ=$(SLASRC) $(DLASRC) $(CLASRC) $(ZLASRC) $(SCLAUX) $(DZLAUX)	\
+ 	$(ALLAUX)
+ 
+-../$(LAPACKLIB): $(ALLOBJ) $(ALLXOBJ)
+-	$(ARCH) $(ARCHFLAGS) $@ $(ALLOBJ) $(ALLXOBJ)
+-	$(RANLIB) $@
++$(LAPACKLIB): $(ALLOBJ) $(ALLXOBJ)
++	$(FORTRAN) -shared -Wl,-soname=$@ -o $@ $(ALLOBJ) $(ALLXOBJ) $(BLASLIB)
+ 
+ single: $(SLASRC) $(ALLAUX) $(SCLAUX) 
+ 	$(ARCH) $(ARCHFLAGS) ../$(LAPACKLIB) $(SLASRC) $(ALLAUX) \
+@@ -409,7 +408,7 @@
+ 	@FRC=$(FRC)
+ 
+ clean:
+-	rm -f *.o
++	rm -f *.o *.so.*
+ 
+ .f.o: 
+ 	$(FORTRAN) $(OPTS) -c $< -o $@
+diff -U 3 -N -r lapack-3.2.1-orig/make.inc.example lapack-3.2.1/make.inc.example
+--- lapack-3.2.1-orig/make.inc.example	2009-04-16 22:09:59.000000000 +0300
++++ lapack-3.2.1/make.inc.example	2009-10-24 18:07:32.000000000 +0300
+@@ -4,6 +4,11 @@
+ #  LAPACK, Version 3.2.1                                           #
+ #  April 2009                                                      #
+ ####################################################################
++
++VER_MAJ = 3
++VER_MIN = 2
++VER_PATCH = 1
++
+ #
+ # See the INSTALL/ directory for more examples.
+ #
+@@ -19,11 +24,11 @@
+ #  selected.  Define LOADER and LOADOPTS to refer to the loader
+ #  and desired load options for your machine.
+ #
+-FORTRAN  = gfortran -fimplicit-none -g
+-OPTS     =
++FORTRAN  = gfortran -fimplicit-none 
++OPTS     = $(FFLAGS) -fPIC
+ DRVOPTS  = $(OPTS)
+ NOOPT    =
+-LOADER   = gfortran -g
++LOADER   = gfortran
+ LOADOPTS =
+ #
+ # Timer for the SECOND and DSECND routines
+@@ -33,10 +38,10 @@
+ # For RS6K : SECOND and DSECND will use a call to the EXTERNAL FUNCTION ETIME_
+ # TIMER    = EXT_ETIME_
+ # For gfortran compiler: SECOND and DSECND will use a call to the INTERNAL FUNCTION ETIME
+-# TIMER    = INT_ETIME
++TIMER    = INT_ETIME
+ # If your Fortran compiler does not provide etime (like Nag Fortran Compiler, etc...)
+ # SECOND and DSECND will use a call to the Fortran standard INTERNAL FUNCTION CPU_TIME 
+-TIMER    = INT_CPU_TIME
++# TIMER    = INT_CPU_TIME
+ # If neither of this works...you can use the NONE value... In that case, SECOND and DSECND will always return 0
+ # TIMER     = NONE
+ #
+@@ -51,7 +56,7 @@
+ #  The target's machine-specific, optimized BLAS library should be
+ #  used whenever possible.
+ #
+-BLASLIB      = ../../blas$(PLAT).a
++BLASLIB      = -lblas
+ #
+ #  Location of the extended-precision BLAS (XBLAS) Fortran library
+ #  used for building and testing extended-precision routines.  The
+@@ -64,7 +69,7 @@
+ #
+ #  Names of generated libraries.
+ #
+-LAPACKLIB    = lapack$(PLAT).a
++LAPACKLIB    = liblapack.so.$(VER_MAJ).$(VER_MIN).$(VER_PATCH)
+ TMGLIB       = tmglib$(PLAT).a
+ EIGSRCLIB    = eigsrc$(PLAT).a
+ LINSRCLIB    = linsrc$(PLAT).a
