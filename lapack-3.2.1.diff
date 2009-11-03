@@ -1,6 +1,6 @@
 diff -U 3 -N -r lapack-3.2.1-orig/SRC/Makefile lapack-3.2.1/SRC/Makefile
 --- lapack-3.2.1-orig/SRC/Makefile	2008-11-18 01:45:27.000000000 +0200
-+++ lapack-3.2.1/SRC/Makefile	2009-10-24 18:07:53.000000000 +0300
++++ lapack-3.2.1/SRC/Makefile	2009-11-03 16:25:27.000000000 +0200
 @@ -357,7 +357,7 @@
     zla_heamv.o zla_hercond_c.o zla_hercond_x.o zla_herpvgrw.o		\
     zla_lin_berr.o zlarscl2.o zlascl2.o zla_wwaddw.o
@@ -33,7 +33,7 @@ diff -U 3 -N -r lapack-3.2.1-orig/SRC/Makefile lapack-3.2.1/SRC/Makefile
  	$(FORTRAN) $(OPTS) -c $< -o $@
 diff -U 3 -N -r lapack-3.2.1-orig/make.inc.example lapack-3.2.1/make.inc.example
 --- lapack-3.2.1-orig/make.inc.example	2009-04-16 22:09:59.000000000 +0300
-+++ lapack-3.2.1/make.inc.example	2009-10-24 18:07:32.000000000 +0300
++++ lapack-3.2.1/make.inc.example	2009-11-03 16:26:56.000000000 +0200
 @@ -4,6 +4,11 @@
  #  LAPACK, Version 3.2.1                                           #
  #  April 2009                                                      #
@@ -53,10 +53,11 @@ diff -U 3 -N -r lapack-3.2.1-orig/make.inc.example lapack-3.2.1/make.inc.example
 -FORTRAN  = gfortran -fimplicit-none -g
 -OPTS     =
 +FORTRAN  = gfortran -fimplicit-none 
-+OPTS     = $(FFLAGS) -fPIC
++OPTS     = -O $(FFLAGS) -mieee-fp -fPIC
  DRVOPTS  = $(OPTS)
- NOOPT    =
+-NOOPT    =
 -LOADER   = gfortran -g
++NOOPT    = $(FFLAGS) -mieee-fp -ffloat-store -fPIC
 +LOADER   = gfortran
  LOADOPTS =
  #
