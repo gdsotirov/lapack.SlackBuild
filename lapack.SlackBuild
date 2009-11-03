@@ -9,7 +9,7 @@ NAME=lapack
 VERSION=3.2.1
 VER_MAJ=3
 VER_MIN=2
-BUILD=1
+BUILD=2
 ARCH=${ARCH:-i486}
 
 TMP=${TMP:-/tmp}
@@ -43,9 +43,12 @@ patch -p1 < $CWD/$NAME-$VERSION.diff
 
 # Configure, build and install
 mv make.inc.example make.inc
-cd SRC
-FFLAGS=$SLKCFLAGS \
-make -j4 || exit 1 
+cd $SRC/INSTALL
+FFLAGS="-march=$ARCH -mtune=i686" \
+make -j4 || exit 1
+cd $SRC/SRC
+FFLAGS="-march=$ARCH -mtune=i686" \
+make -j4 || exit 1
 
 # Install
 install -d -m 755 $PKG/usr/lib
