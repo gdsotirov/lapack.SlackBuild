@@ -6,10 +6,10 @@
 . ../slack-package.conf
 
 NAME=lapack
-VERSION=3.2.1
+VERSION=3.2.2
 VER_MAJ=3
 VER_MIN=2
-BUILD=2
+BUILD=${BUILD:-1}
 ARCH=${ARCH:-i486}
 
 TMP=${TMP:-/tmp}
@@ -34,11 +34,11 @@ mkdir -p $PKG
 
 # Extract the source
 cd $TMP
-tar -zxvf $CWD/$NAME-$VERSION.tgz
+tar -xvf $CWD/$NAME-$VERSION.tgz
 cd $SRC
 fix_source
 
-# Patch the source
+# Apply patches
 patch -p1 < $CWD/$NAME-$VERSION.diff
 
 # Configure, build and install
