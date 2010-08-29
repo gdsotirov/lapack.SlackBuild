@@ -1,6 +1,8 @@
-diff -U 3 -N -r lapack-3.2.1-orig/SRC/Makefile lapack-3.2.1/SRC/Makefile
---- lapack-3.2.1-orig/SRC/Makefile	2008-11-18 01:45:27.000000000 +0200
-+++ lapack-3.2.1/SRC/Makefile	2009-11-03 16:25:27.000000000 +0200
+# Enable build of shared library
+
+diff -N -r -U 3 lapack-3.2.2-orig/SRC/Makefile lapack-3.2.2/SRC/Makefile
+--- lapack-3.2.2-orig/SRC/Makefile	2010-06-23 22:28:59.000000000 +0300
++++ lapack-3.2.2/SRC/Makefile	2010-08-29 19:22:58.000000000 +0300
 @@ -357,7 +357,7 @@
     zla_heamv.o zla_hercond_c.o zla_hercond_x.o zla_herpvgrw.o		\
     zla_lin_berr.o zlarscl2.o zlascl2.o zla_wwaddw.o
@@ -31,17 +33,17 @@ diff -U 3 -N -r lapack-3.2.1-orig/SRC/Makefile lapack-3.2.1/SRC/Makefile
  
  .f.o: 
  	$(FORTRAN) $(OPTS) -c $< -o $@
-diff -U 3 -N -r lapack-3.2.1-orig/make.inc.example lapack-3.2.1/make.inc.example
---- lapack-3.2.1-orig/make.inc.example	2009-04-16 22:09:59.000000000 +0300
-+++ lapack-3.2.1/make.inc.example	2009-11-03 16:26:56.000000000 +0200
+diff -N -r -U 3 lapack-3.2.2-orig/make.inc.example lapack-3.2.2/make.inc.example
+--- lapack-3.2.2-orig/make.inc.example	2010-06-23 20:25:30.000000000 +0300
++++ lapack-3.2.2/make.inc.example	2010-08-29 19:22:58.000000000 +0300
 @@ -4,6 +4,11 @@
- #  LAPACK, Version 3.2.1                                           #
- #  April 2009                                                      #
+ #  LAPACK, Version 3.2.2                                           #
+ #  June 2010                                                       #
  ####################################################################
 +
 +VER_MAJ = 3
 +VER_MIN = 2
-+VER_PATCH = 1
++VER_PATCH = 2
 +
  #
  # See the INSTALL/ directory for more examples.
