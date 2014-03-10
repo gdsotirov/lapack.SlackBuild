@@ -17,13 +17,13 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: lapack-3.4.2.diff,v 1.1 2014/03/09 20:07:39 gsotirov Exp $
+# $Id: lapack-3.5.0.diff,v 1.1 2014/03/10 20:13:57 gsotirov Exp $
 #
 
-diff -urNad lapack-3.4.2-orig/SRC/Makefile lapack-3.4.2/SRC/Makefile
---- lapack-3.4.2-orig/SRC/Makefile	2012-04-02 22:06:36.000000000 +0300
-+++ lapack-3.4.2/SRC/Makefile	2014-03-09 21:46:12.000000000 +0200
-@@ -405,11 +405,10 @@
+diff -urNad lapack-3.5.0-orig/SRC/Makefile lapack-3.5.0/SRC/Makefile
+--- lapack-3.5.0-orig/SRC/Makefile	2013-07-09 07:06:39.000000000 +0300
++++ lapack-3.5.0/SRC/Makefile	2014-03-10 14:23:38.000000000 +0200
+@@ -421,11 +421,10 @@
  ALLXOBJ = $(SXLASRC) $(DXLASRC) $(CXLASRC) $(ZXLASRC)
  endif
  
@@ -38,7 +38,7 @@ diff -urNad lapack-3.4.2-orig/SRC/Makefile lapack-3.4.2/SRC/Makefile
  
  single: $(SLASRC) $(DSLASRC) $(SXLASRC) $(SCLAUX) $(ALLAUX)
  	$(ARCH) $(ARCHFLAGS) ../$(LAPACKLIB) $(SLASRC) $(DSLASRC) \
-@@ -451,7 +450,7 @@
+@@ -467,7 +466,7 @@
  	@FRC=$(FRC)
  
  clean:
@@ -47,16 +47,17 @@ diff -urNad lapack-3.4.2-orig/SRC/Makefile lapack-3.4.2/SRC/Makefile
  
  .f.o: 
  	$(FORTRAN) $(OPTS) -c $< -o $@
---- lapack-3.4.2-orig/make.inc.example	2012-04-13 21:13:07.000000000 +0300
-+++ lapack-3.4.2/make.inc.example	2014-03-09 21:58:35.000000000 +0200
+diff -urNad lapack-3.5.0-orig/make.inc.example lapack-3.5.0/make.inc.example
+--- lapack-3.5.0-orig/make.inc.example	2013-11-17 02:25:52.000000000 +0200
++++ lapack-3.5.0/make.inc.example	2014-03-10 14:26:49.000000000 +0200
 @@ -3,6 +3,11 @@
- #  LAPACK, Version 3.4.0                                           #
- #  April 2012                                                   #
+ #  LAPACK, Version 3.5.0                                           #
+ #  November 2013                                                   #
  ####################################################################
 +
 +VER_MAJ = 3
-+VER_MIN = 4
-+VER_PATCH = 2
++VER_MIN = 5
++VER_PATCH = 0
 +
  #
  SHELL = /bin/sh
@@ -65,11 +66,11 @@ diff -urNad lapack-3.4.2-orig/SRC/Makefile lapack-3.4.2/SRC/Makefile
  #  desired load options for your machine.
  #
  FORTRAN  = gfortran 
--OPTS     = -O2
-+OPTS     = $(FFLAGS) -O2 -mieee-fp -fPIC
+-OPTS     = -O2 -frecursive
++OPTS     = $(FFLAGS) -O2 -mieee-fp -frecursive -fPIC
  DRVOPTS  = $(OPTS)
--NOOPT    = -O0
-+NOOPT    = $(FFLAGS) -O0 -mieee-fp -ffloat-store -fPIC
+-NOOPT    = -O0 -frecursive
++NOOPT    = $(FFLAGS) -O0 -mieee-fp -frecursive -ffloat-store -fPIC
  LOADER   = gfortran
  LOADOPTS =
  #
