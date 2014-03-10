@@ -19,15 +19,15 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: lapack.SlackBuild,v 1.7 2014/03/09 20:06:42 gsotirov Exp $
+# $Id: lapack.SlackBuild,v 1.8 2014/03/10 13:26:55 gsotirov Exp $
 #
 
 . ../../slack-package.conf
 
 NAME=lapack
-VERSION=3.4.2
+VERSION=3.5.0
 VER_MAJ=3
-VER_MIN=4
+VER_MIN=5
 BUILD=${BUILD:-1}
 ARCH=${ARCH:-i486}
 
@@ -61,8 +61,6 @@ fix_source
 patch -p1 < $CWD/$NAME-$VERSION.diff
 
 # Configure, build and install
-
-onfigure, build and install
 if [ "$ARCH" = "i386" ]; then
   SLKFFLAGS="-march=i386 -mtune=i686"
 elif [ "$ARCH" = "i486" ]; then
