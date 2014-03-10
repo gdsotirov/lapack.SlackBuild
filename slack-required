@@ -1,4 +1,4 @@
-aaa_elflibs >= 13.37 | gcc-4.5.2
-blas
-gcc-gfortran >= 4.5.2
-glibc-solibs >= 2.13
+aaa_elflibs >= 14.1 | gcc-4.8.2
+blas >= 20110419
+gcc-gfortran >= 4.8.2
+glibc-solibs >= 2.17
