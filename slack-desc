@@ -10,4 +10,4 @@ lapack: factorizations and estimating condition numbers.  Dense and banded
 lapack: matrices are handled, but not general sparse matrices.  In all
 lapack: areas, similar functionality is provided for real and complex
 lapack: matrices, in both single and double precision.
-lapack: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
+lapack: Packaged by Georgi D. Sotirov <gdsotirov@gmail.com>
