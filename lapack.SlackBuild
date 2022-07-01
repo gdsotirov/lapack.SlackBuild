@@ -84,24 +84,32 @@ make DESTDIR=$PKG install || exit 7
 ( cd $PKG/usr/lib${LIBDIRSUFFIX}; rm libblas.so* )
 ( cd $PKG/usr/lib${LIBDIRSUFFIX}/pkgconfig; rm blas.pc )
 install --directory --mode 755 $PKG/usr/doc/${NAME}-${VERSION}
-install --mode 644 $SRC/README  $PKG/usr/doc/${NAME}-${VERSION}/README
-install --mode 644 $SRC/LICENSE $PKG/usr/doc/${NAME}-${VERSION}/COPYING
+install --mode 644 --preserve-timestamps \
+        $SRC/README  $PKG/usr/doc/${NAME}-${VERSION}/README
+install --mode 644 --preserve-timestamps \
+        $SRC/LICENSE $PKG/usr/doc/${NAME}-${VERSION}/COPYING
 
 # Prepare the package
 ( cd $PKG; strip_lib )
 
 mkdir -p $PKG/install
-install --mode 644 $CWD/slack-desc     $PKG/install/slack-desc
-install --mode 644 $CWD/slack-required $PKG/install/slack-required
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-desc     $PKG/install/slack-desc
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-required $PKG/install/slack-required
 
 SBDIR=$PKG/usr/src/slackbuilds/${NAME}-${VERSION}
 install --mode 755 --directory $SBDIR
-install --mode 644 $CWD/slack-desc              $SBDIR/slack-desc
-install --mode 644 $CWD/slack-required          $SBDIR/slack-required
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-desc              $SBDIR/slack-desc
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-required          $SBDIR/slack-required
 if [ -e $CWD/${NAME}-${VERSION}.diff ]; then
-install --mode 644 $CWD/${NAME}-${VERSION}.diff $SBDIR/${NAME}-${VERSION}.diff
+install --mode 644 --preserve-timestamps \
+        $CWD/${NAME}-${VERSION}.diff $SBDIR/${NAME}-${VERSION}.diff
 fi
-install --mode 644 $CWD/${NAME}.SlackBuild      $SBDIR/${NAME}.SlackBuild
+install --mode 644 --preserve-timestamps \
+        $CWD/${NAME}.SlackBuild      $SBDIR/${NAME}.SlackBuild
 
 # Pack
 cd $PKG
