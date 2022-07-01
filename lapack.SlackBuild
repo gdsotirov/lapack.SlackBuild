@@ -24,7 +24,7 @@
 
 NAME=lapack
 VER_MAJ=3
-VER_MIN=7
+VER_MIN=10
 VERSION=${VER_MAJ}.${VER_MIN}.1
 ARCH=${ARCH:-i586}
 BUILD=${BUILD:-1}
@@ -51,7 +51,7 @@ mkdir --parents $PKG
 
 # Extract the source
 cd $TMP
-tar --extract --verbose --file=$CWD/${NAME}-${VERSION}.tar.gz || exit 3
+tar --extract --verbose --file=$CWD/${NAME}-${VERSION}.tgz || exit 3
 cd $SRC
 fix_source
 
@@ -85,9 +85,9 @@ make DESTDIR=$PKG install || exit 7
 ( cd $PKG/usr/lib${LIBDIRSUFFIX}/pkgconfig; rm blas.pc )
 install --directory --mode 755 $PKG/usr/doc/${NAME}-${VERSION}
 install --mode 644 --preserve-timestamps \
-        $SRC/README  $PKG/usr/doc/${NAME}-${VERSION}/README
+        $SRC/README.md $PKG/usr/doc/${NAME}-${VERSION}/README
 install --mode 644 --preserve-timestamps \
-        $SRC/LICENSE $PKG/usr/doc/${NAME}-${VERSION}/COPYING
+        $SRC/LICENSE   $PKG/usr/doc/${NAME}-${VERSION}/COPYING
 
 # Prepare the package
 ( cd $PKG; strip_lib )
