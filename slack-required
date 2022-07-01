@@ -1,4 +1,4 @@
-blas >= 3.6.0
-gcc >= 5.3.0
-gcc-gfortran >= 5.3.0
-glibc-solibs >= 2.23
+aaa_glibc-solibs >= 2.33
+blas >= 3.10.0
+gcc >= 11.2.0
+gcc-gfortran >= 11.2.0
