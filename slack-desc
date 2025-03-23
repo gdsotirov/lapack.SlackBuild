@@ -1,6 +1,7 @@
 lapack: LAPACK (Linear Algebra PACKage)
 lapack:
-lapack: LAPACK is written in Fortran90 and provides routines for solving
+lapack: LAPACK is a library of Fortran subroutines for solving the most
+lapack: commonly occurring problems in numerical linear algebra like solving
 lapack: systems of simultaneous linear equations, least-squares solutions
 lapack: of linear systems of equations, eigenvalue problems, and singular
 lapack: value problems.  The associated matrix factorizations (LU,
@@ -10,4 +11,8 @@ lapack: factorizations and estimating condition numbers.  Dense and banded
 lapack: matrices are handled, but not general sparse matrices.  In all
 lapack: areas, similar functionality is provided for real and complex
 lapack: matrices, in both single and double precision.
+lapack: The package contains also the Fortran subroutines of the Basic Linear
+lapack: Algebra Subprograms (the Level 1, 2, and 3 BLAS), CBLAS, a C interface
+lapack: to the BLAS, and LAPACKE, a C interface to LAPACK.
+lapack:
 lapack: Packaged by Georgi D. Sotirov <gdsotirov@gmail.com>
