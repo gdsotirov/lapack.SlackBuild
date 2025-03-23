@@ -65,24 +65,23 @@ mkdir build; cd build
 cmake -LAH \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_Fortran_FLAGS="${SLKCFLAGS}" \
-      -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_INSTALL_LIBDIR=/usr/lib${LIBDIRSUFFIX} \
-      -DBUILD_COMPLEX=ON \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_SKIP_RPATH=YES \
+      -DCMAKE_VERBOSE_MAKEFILE=TRUE \
       -DBUILD_COMPLEX16=ON \
+      -DBUILD_COMPLEX=ON \
       -DBUILD_DOUBLE=ON \
+      -DBUILD_SHARED_LIBS=ON \
       -DBUILD_SINGLE=ON \
       -DBUILD_TESTING=OFF \
-      -DBUILD_SHARED_LIBS=ON \
-      -DBUILD_STATIC_LIBS=OFF \
-      -DCMAKE_VERBOSE_MAKEFILE=TRUE \
-      -DCMAKE_SKIP_RPATH=YES \
+      -DCBLAS=ON \
+      -DLAPACKE=ON \
       .. || exit 5
+
 make V=1 --jobs 8 || exit 6
 make DESTDIR=$PKG install || exit 7
 
-# Remove BLAS (provided as separate package)
-( cd $PKG/usr/lib${LIBDIRSUFFIX}; rm libblas.so* )
-( cd $PKG/usr/lib${LIBDIRSUFFIX}/pkgconfig; rm blas.pc )
 install --directory --mode 755 $PKG/usr/doc/${NAME}-${VERSION}
 install --mode 644 --preserve-timestamps \
         $SRC/README.md $PKG/usr/doc/${NAME}-${VERSION}/README
@@ -94,14 +93,18 @@ install --mode 644 --preserve-timestamps \
 
 mkdir -p $PKG/install
 install --mode 644 --preserve-timestamps \
-        $CWD/slack-desc     $PKG/install/slack-desc
+        $CWD/slack-desc      $PKG/install/slack-desc
 install --mode 644 --preserve-timestamps \
-        $CWD/slack-required $PKG/install/slack-required
+        $CWD/slack-conflicts $PKG/install/slack-conflicts
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-required  $PKG/install/slack-required
 
 SBDIR=$PKG/usr/src/slackbuilds/${NAME}-${VERSION}
 install --mode 755 --directory $SBDIR
 install --mode 644 --preserve-timestamps \
         $CWD/slack-desc              $SBDIR/slack-desc
+install --mode 644 --preserve-timestamps \
+        $CWD/slack-conflicts         $SBDIR/slack-conflicts
 install --mode 644 --preserve-timestamps \
         $CWD/slack-required          $SBDIR/slack-required
 if [ -e $CWD/${NAME}-${VERSION}.diff ]; then
